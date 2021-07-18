@@ -12,6 +12,9 @@ struct Point final
     int X, Y;
 };
 
+//! 기권을 표시하는 좌표.
+inline const Point Resign{ -1, -1 };
+
 //!
 //! \brief 돌의 색을 표현하는 열거체.
 //!
