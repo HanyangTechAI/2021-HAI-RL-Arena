@@ -10,6 +10,16 @@ namespace Arena
 struct Point final
 {
     int X, Y;
+
+    bool operator==(const Point& pt) const
+    {
+        return (X == pt.X) && (Y == pt.Y);
+    }
+
+    bool operator!=(const Point& pt) const
+    {
+        return !(*this == pt);
+    }
 };
 
 //! 기권을 표시하는 좌표.
