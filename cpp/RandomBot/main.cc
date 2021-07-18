@@ -21,12 +21,12 @@ class RandomBot final : public Arena::Agent
 
     Arena::Point GenMove(Arena::StoneType color) override
     {
-        std::uniform_int_distribution<int> dist(-1, boardSize_ - 1);
+        std::uniform_int_distribution<int> dist(0, boardSize_);
 
         const int X = dist(engine);
         const int Y = dist(engine);
 
-        if (X == -1 || Y == -1)
+        if (X == 0 || Y == 0)
             return Arena::Resign;
 
         return Arena::Point{ X, Y };
