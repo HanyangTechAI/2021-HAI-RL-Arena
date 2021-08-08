@@ -3,6 +3,7 @@
 
 #include <Arena/Types.hpp>
 
+#include <cstdint>
 #include <vector>
 
 namespace Arena
