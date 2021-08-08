@@ -57,7 +57,7 @@ void Agent::Run()
         else if (tokens[0] == "play")
         {
             const StoneType oppColor = parseStoneType(tokens[1]);
-            const Point move{ std::stoi(tokens[1]), std::stoi(tokens[2]) };
+            const Point move{ std::stoi(tokens[2]), std::stoi(tokens[3]) };
             Play(oppColor, move);
 
             std::cout << "=" << std::endl;
