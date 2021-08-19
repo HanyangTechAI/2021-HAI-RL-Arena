@@ -13,9 +13,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 
+# External Libraries
+cmake_policy(SET CMP0063 NEW)
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
+
+set(BUILD_SHARED_LIBS FALSE)
+add_subdirectory(Libraries/pybind11)
+
 # Includes
 include_directories(Includes)
 
 # Project module
 add_subdirectory(Sources/Arena)
 add_subdirectory(RandomBot)
+add_subdirectory(Extension/pyArena)
