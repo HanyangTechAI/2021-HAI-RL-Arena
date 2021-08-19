@@ -59,7 +59,7 @@ public:
     }    
 };
 
-void buildArena(py::module& m) {
+void buildAgent(py::module& m) {
     py::class_<Agent, PyAgent>(m, "Agent")
         .def(py::init<std::string>())
         .def("BoardSize", &Agent::BoardSize)

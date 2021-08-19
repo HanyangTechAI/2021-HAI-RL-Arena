@@ -15,6 +15,10 @@ void buildPointStruct(py::module& m) {
         .def(py::self != py::self);
 }
 
+void buildResignStruct(py::module& m) {
+	m.def("resign", []() { return Resign; });
+}
+
 void buildStoneTypeEnum(py::module& m) {
     py::enum_<StoneType>(m, "StoneType")
         .value("NONE", StoneType::NONE)
@@ -22,3 +26,8 @@ void buildStoneTypeEnum(py::module& m) {
         .value("WHITE", StoneType::WHITE)
         .value("INVALID", StoneType::INVALID);
 }
+
+void buildOpponentFunc(py::module& m) {
+	m.def("opponent", &Opponent);
+}
+
