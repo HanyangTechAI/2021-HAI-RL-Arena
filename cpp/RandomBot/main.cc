@@ -38,6 +38,12 @@ class RandomBot final : public Arena::Agent
         (void)pt;
     }
 
+    void TimeLeft(int blackTime, int whiteTime) override
+    {
+        leftTimes_[0] = blackTime;
+        leftTimes_[1] = whiteTime;
+    }
+
     void ClearBoard() override
     {
     }
@@ -45,6 +51,7 @@ class RandomBot final : public Arena::Agent
  private:
     int boardSize_{ 0 };
     int timesPerMove_{ 0 };
+    int leftTimes_[2]{ 0 };
 
     std::mt19937 engine;
 };

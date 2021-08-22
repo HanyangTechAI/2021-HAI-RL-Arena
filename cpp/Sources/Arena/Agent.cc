@@ -62,6 +62,15 @@ void Agent::Run()
 
             std::cout << "=" << std::endl;
         }
+        else if (tokens[0] == "time_left")
+        {
+            const int blackTime = std::stoi(tokens[1]);
+            const int whiteTime = std::stoi(tokens[2]);
+
+            TimeLeft(blackTime, whiteTime);
+
+            std::cout << "=" << std::endl;
+        }
         else if (tokens[0] == "clear_board")
         {
             ClearBoard();
