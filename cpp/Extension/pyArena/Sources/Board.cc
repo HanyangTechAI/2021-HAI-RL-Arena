@@ -7,7 +7,8 @@
 namespace py = pybind11;
 using namespace Arena;
 
-void buildBoard(py::module& m) {
+void buildBoard(py::module& m)
+{
     py::class_<Board>(m, "Board")
         .def(py::init<int>())
         .def("GetBoardSize", &Board::GetBoardSize)
