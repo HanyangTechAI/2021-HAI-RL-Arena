@@ -44,10 +44,10 @@ void buildAgent(py::module& m)
 {
     py::class_<Agent, PyAgent>(m, "Agent")
         .def(py::init<std::string>())
-        .def("BoardSize", &Agent::BoardSize)
-        .def("TimeSetting", &Agent::TimeSetting)
-        .def("GenMove", &Agent::GenMove)
-        .def("Play", &Agent::Play)
-        .def("ClearBoard", &Agent::ClearBoard)
-        .def("Run", &Agent::Run);
+        .def("board_size", &Agent::BoardSize)
+        .def("time_setting", &Agent::TimeSetting)
+        .def("gen_move", &Agent::GenMove)
+        .def("play", &Agent::Play)
+        .def("clear_board", &Agent::ClearBoard)
+        .def("run", &Agent::Run);
 }
