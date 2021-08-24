@@ -2,7 +2,8 @@
 #include <pyArena/Board.h>
 #include <pyArena/Types.h>
 
-PYBIND11_MODULE(pyArena, m) {
+PYBIND11_MODULE(pyArena, m)
+{
     m.doc() = R"pbdoc(HAIArena reinforcement learning agent)pbdoc";
 
     buildAgent(m);
