@@ -87,19 +87,14 @@ TEST_CASE("[Board] Capture One Test")
 {
     Board bd(19);
 
-    bd.Play(Point{ 10, 10 });
-    bd.ToStream(std::cerr);
+    bd.Play(Point{ 10, 10 }, StoneType::BLACK);
     bd.Play(Point{ 10, 11 }, StoneType::WHITE);
-    bd.ToStream(std::cerr);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
     bd.Play(Point{ 9, 10 }, StoneType::WHITE);
-    bd.ToStream(std::cerr);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
     bd.Play(Point{ 10, 9 }, StoneType::WHITE);
-    bd.ToStream(std::cerr);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
     bd.Play(Point{ 11, 10 }, StoneType::WHITE);
-    bd.ToStream(std::cerr);
 
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::NONE);
     CHECK_EQ(bd.At(Point{ 10, 11 }), StoneType::WHITE);
@@ -112,7 +107,7 @@ TEST_CASE("[Board] Capture Many Tests")
 {
     Board bd(19);
 
-    bd.Play(Point{ 10, 10 });
+    bd.Play(Point{ 10, 10 }, StoneType::BLACK);
     bd.Play(Point{ 10, 11 }, StoneType::BLACK);
     bd.Play(Point{ 9, 10 }, StoneType::BLACK);
     bd.Play(Point{ 10, 9 }, StoneType::BLACK);
@@ -124,7 +119,6 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::BLACK);
-    bd.ToStream(std::cerr);
 
     bd.Play(Point{ 9, 9 }, StoneType::WHITE);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
@@ -132,7 +126,6 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::BLACK);
-    bd.ToStream(std::cerr);
 
     bd.Play(Point{ 8, 10 }, StoneType::WHITE);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
@@ -140,7 +133,6 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::BLACK);
-    bd.ToStream(std::cerr);
 
     bd.Play(Point{ 9, 11 }, StoneType::WHITE);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
@@ -148,7 +140,6 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::BLACK);
-    bd.ToStream(std::cerr);
 
     bd.Play(Point{ 10, 12 }, StoneType::WHITE);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
@@ -156,7 +147,6 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::BLACK);
-    bd.ToStream(std::cerr);
 
     bd.Play(Point{ 11, 11 }, StoneType::WHITE);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
@@ -164,7 +154,6 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::BLACK);
-    bd.ToStream(std::cerr);
 
     bd.Play(Point{ 12, 10 }, StoneType::WHITE);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::BLACK);
@@ -172,7 +161,6 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::BLACK);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::BLACK);
-    bd.ToStream(std::cerr);
 
     bd.Play(Point{ 11, 9 }, StoneType::WHITE);
     CHECK_EQ(bd.At(Point{ 10, 10 }), StoneType::NONE);
@@ -180,5 +168,122 @@ TEST_CASE("[Board] Capture Many Tests")
     CHECK_EQ(bd.At(Point{ 9, 10 }), StoneType::NONE);
     CHECK_EQ(bd.At(Point{ 10, 9 }), StoneType::NONE);
     CHECK_EQ(bd.At(Point{ 11, 10 }), StoneType::NONE);
-    bd.ToStream(std::cerr);
+}
+
+TEST_CASE("[Board] Capture One at Corner Test")
+{
+    Board bd(19);
+
+    // 11시 방향에서 테스트
+    bd.Play(Point{ 1, 1 }, StoneType::BLACK);
+
+    bd.Play(Point{ 1, 2 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 1, 1 }), StoneType::BLACK);
+
+    bd.Play(Point{ 2, 1 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 1, 1 }), StoneType::NONE);
+
+    // 5시 방향에서 테스트
+    bd.Play(Point{ 19, 19 }, StoneType::WHITE);
+
+    bd.Play(Point{ 18, 19 }, StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 19, 19 }), StoneType::WHITE);
+
+    bd.Play(Point{ 19, 18 }, StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 19, 19 }), StoneType::NONE);
+}
+
+TEST_CASE("[Board] Capture Many at Corner Test")
+{
+    Board bd(19);
+
+    // 11시 방향에서 테스트
+    bd.Play(Point{ 1, 1 }, StoneType::BLACK);
+    bd.Play(Point{ 2, 1 }, StoneType::BLACK);
+    bd.Play(Point{ 1, 2 }, StoneType::BLACK);
+
+    bd.Play(Point{ 1, 3 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 1, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 2, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 1, 2 }), StoneType::BLACK);
+
+    bd.Play(Point{ 3, 1 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 1, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 2, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 1, 2 }), StoneType::BLACK);
+
+    bd.Play(Point{ 2, 2 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 1, 1 }), StoneType::NONE);
+    CHECK_EQ(bd.At(Point{ 2, 1 }), StoneType::NONE);
+    CHECK_EQ(bd.At(Point{ 1, 2 }), StoneType::NONE);
+
+    // 5시 방향에서 테스트
+    bd.Play(Point{ 19, 19 }, StoneType::WHITE);
+    bd.Play(Point{ 18, 19 }, StoneType::WHITE);
+    bd.Play(Point{ 19, 18 }, StoneType::WHITE);
+
+    bd.Play(Point{ 17, 19 }, StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 19, 19 }), StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 18, 19 }), StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 19, 18 }), StoneType::WHITE);
+
+    bd.Play(Point{ 19, 17 }, StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 19, 19 }), StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 18, 19 }), StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 19, 18 }), StoneType::WHITE);
+
+    bd.Play(Point{ 18, 18 }, StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 19, 19 }), StoneType::NONE);
+    CHECK_EQ(bd.At(Point{ 18, 19 }), StoneType::NONE);
+    CHECK_EQ(bd.At(Point{ 19, 18 }), StoneType::NONE);
+}
+
+TEST_CASE("[Board] Capture One at Edge Test")
+{
+    Board bd(19);
+
+    bd.Play(Point{ 10, 1 }, StoneType::BLACK);
+
+    bd.Play(Point{ 9, 1 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::BLACK);
+
+    bd.Play(Point{ 10, 2 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::BLACK);
+
+    bd.Play(Point{ 11, 1 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::NONE);
+}
+
+TEST_CASE("[Board] Capture Many at Edge Test")
+{
+    Board bd(19);
+
+    bd.Play(Point{ 9, 1 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 1 }, StoneType::BLACK);
+    bd.Play(Point{ 11, 1 }, StoneType::BLACK);
+
+    bd.Play(Point{ 8, 1 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 9, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 11, 1 }), StoneType::BLACK);
+
+    bd.Play(Point{ 12, 1 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 9, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 11, 1 }), StoneType::BLACK);
+
+    bd.Play(Point{ 9, 2 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 9, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 11, 1 }), StoneType::BLACK);
+
+    bd.Play(Point{ 10, 2 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 9, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::BLACK);
+    CHECK_EQ(bd.At(Point{ 11, 1 }), StoneType::BLACK);
+
+    bd.Play(Point{ 11, 2 }, StoneType::WHITE);
+    CHECK_EQ(bd.At(Point{ 9, 1 }), StoneType::NONE);
+    CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::NONE);
+    CHECK_EQ(bd.At(Point{ 11, 1 }), StoneType::NONE);
 }

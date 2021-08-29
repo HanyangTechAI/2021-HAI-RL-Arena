@@ -37,9 +37,9 @@ Board::Board(int boardSize)
             board_[idx] = StoneType::NONE;
 
             neighbors_[idx] +=
-                ((1 + (x == 1 || x == boardSize)) << shift(StoneType::NONE));
+                ((1 + !(x == 1 || x == boardSize)) << shift(StoneType::NONE));
             neighbors_[idx] +=
-                ((1 + (y == 1 || y == boardSize)) << shift(StoneType::NONE));
+                ((1 + !(y == 1 || y == boardSize)) << shift(StoneType::NONE));
         }
     }
 }
@@ -318,19 +318,22 @@ void Board::mergeGroup(int idx1, int idx2)
     {
         for (NeighborIterator it(*this, PT(idx)); it; ++it)
         {
-            bool found = false;
-            for (NeighborIterator it2(*this, *it); it2; ++it2)
+            if (board_[IDX(*it)] == StoneType::NONE)
             {
-                if (parent_[IDX(*it2)] == idx1)
+                bool found = false;
+                for (NeighborIterator it2(*this, *it); it2; ++it2)
                 {
-                    found = true;
-                    break;
+                    if (parent_[IDX(*it2)] == idx1)
+                    {
+                        found = true;
+                        break;
+                    }
                 }
-            }
 
-            if (!found)
-            {
-                ++liberties_[idx1];
+                if (!found)
+                {
+                    ++liberties_[idx1];
+                }
             }
         }
 
