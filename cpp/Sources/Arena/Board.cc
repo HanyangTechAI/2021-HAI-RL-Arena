@@ -146,7 +146,7 @@ void Board::Play(const Point& pt, StoneType color)
     if (pt == Resign || !IsValidMove(pt))
     {
         isFinished_ = true;
-        winner_ = Opponent(color);
+        winner_ = Opponent(current_);
 
         return;
     }
