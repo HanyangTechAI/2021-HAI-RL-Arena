@@ -40,13 +40,6 @@ void Agent::Run()
 
             std::cout << "=" << std::endl;
         }
-        else if (tokens[0] == "time_setting")
-        {
-            const int timesPerMove = std::stoi(tokens[1]);
-            TimeSetting(timesPerMove);
-
-            std::cout << "=" << std::endl;
-        }
         else if (tokens[0] == "genmove")
         {
             const StoneType color = parseStoneType(tokens[1]);

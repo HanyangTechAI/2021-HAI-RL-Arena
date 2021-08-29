@@ -25,10 +25,6 @@ class Agent
     //! \param boardSize 판의 줄 수.
     virtual void BoardSize(int boardSize) = 0;
 
-    //! 서버가 시간 설정을 알려줄 때 호출됩니다.
-    //! \param timesPerMove 한 턴당 주어진 시간.
-    virtual void TimeSetting(int timesPerMove) = 0;
-
     //! 서버에게 다음 수를 요청받았을 때 호출됩니다.
     //! \param color 착수할 돌의 색깔.
     //! \return 생성된 착수 위치.

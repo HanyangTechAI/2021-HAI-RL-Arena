@@ -14,11 +14,6 @@ class RandomBot final : public Arena::Agent
         boardSize_ = boardSize;
     }
 
-    void TimeSetting(int timesPerMove) override
-    {
-        timesPerMove_ = timesPerMove;
-    }
-
     Arena::Point GenMove(Arena::StoneType color) override
     {
         std::uniform_int_distribution<int> dist(0, boardSize_);
