@@ -378,11 +378,22 @@ TEST_CASE("[Board] Ko at Corner Test")
     bd.Play(Point{ 2, 1 });
     bd.Play(Point{ 2, 2 });
 
-    bd.ToStream(std::cout);
-
     bd.Play(Point{ 1, 1 }, StoneType::WHITE);
 
-    bd.ToStream(std::cout);
-
     CHECK_EQ(bd.IsKo(Point{ 1, 2 }), true);
+}
+
+TEST_CASE("[Board] Ko at Edge Test")
+{
+    Board bd(19);
+
+    bd.Play(Point{ 8, 1 }, StoneType::BLACK);
+    bd.Play(Point{ 9, 2 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 1 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 2 }, StoneType::WHITE);
+    bd.Play(Point{ 11, 1 }, StoneType::WHITE);
+    
+    bd.Play(Point{ 9, 1 }, StoneType::WHITE);
+
+    CHECK_EQ(bd.IsKo(Point{ 10, 1 }), true);
 }
