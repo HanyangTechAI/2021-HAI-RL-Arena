@@ -1,33 +1,34 @@
 import os
 import sys
 from subprocess import PIPE, Popen
+from argparse import Namespace
 
 from pyArena import Board, Point, StoneType
 
 from .utils import get_board_string, read, write
 
 
-def run():
+def run(args: Namespace):
     board_size = 10
     turn = 0
 
     players = {
         "b": Popen(
-            [sys.executable, "-u", "pyArenaPlayer/player_agent.py"],
+            [sys.executable, "-u", args.black_agent_path],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
         ),
         "w": Popen(
-            [sys.executable, "-u", "pyArenaPlayer/player_agent.py"],
+            [sys.executable, "-u", args.white_agent_path],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
         ),
     }
     is_human = {
-        "b": True,
-        "w": True,
+        "b": args.black_human,
+        "w": args.white_human,
     }
     stone_type = {
         "b": StoneType.BLACK,
