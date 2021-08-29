@@ -51,8 +51,9 @@ class Board final
 
     //! 해당 착수점이 자살수인지 체크하는 메소드.
     //! \param pt 조사할 착수점 위치.
+    //! \param color 조사할 돌의 색깔 (기본값으로 둘 경우 current_로 설정됨)
     //! \return 자살수이면 true, 그렇지 않으면 false를 반환.
-    bool IsSuicide(const Point& pt) const;
+    bool IsSuicide(const Point& pt, StoneType color = StoneType::NONE) const;
 
     //! 해당 위치의 돌의 색깔을 반환합니다.
     //! \param pt 조사할 위치.

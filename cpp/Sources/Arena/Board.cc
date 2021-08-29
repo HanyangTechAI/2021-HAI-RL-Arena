@@ -83,8 +83,11 @@ bool Board::IsKo(const Point& pt) const
     return ko_ == pt;
 }
 
-bool Board::IsSuicide(const Point& pt) const
+bool Board::IsSuicide(const Point& pt, StoneType color) const
 {
+    if (color == StoneType::NONE)
+        color = current_;
+
     if (countNeighbors(IDX(pt), StoneType::NONE) > 0)
         return false;
 
@@ -95,10 +98,10 @@ bool Board::IsSuicide(const Point& pt) const
                              ? 9999
                              : liberties_[parent_[neighborIdx]];
 
-        if (board_[neighborIdx] == current_ && libs > 1)
+        if (board_[neighborIdx] == color && libs > 1)
             return false;
 
-        if (board_[neighborIdx] == Opponent(current_) && libs <= 1)
+        if (board_[neighborIdx] == Opponent(color) && libs <= 1)
             return false;
     }
 
