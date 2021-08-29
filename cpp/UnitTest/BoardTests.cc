@@ -397,3 +397,344 @@ TEST_CASE("[Board] Ko at Edge Test")
 
     CHECK_EQ(bd.IsKo(Point{ 10, 1 }), true);
 }
+
+TEST_CASE("[Board] Black Win Test 1")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 5 + i, 10 });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 1 });
+        }
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::BLACK);
+}
+
+TEST_CASE("[Board] Black Win Test 2")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 17, 5 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 1 });
+        }
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::BLACK);
+}
+
+TEST_CASE("[Board] Black Win Test 3")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 3 + i, 3 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 19 });
+        }
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::BLACK);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 1")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 1 + i, 10 });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 1 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 2")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 + i, 10 });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 1 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 3")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 17, 1 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 19 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 4")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 17, 2 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 1 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 5")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 1 + i, 1 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 19 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 6")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 + i, 2 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 1 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 7")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 + i, 1 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 19 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] Black Fake Win Test 8")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 1 + i, 2 + i });
+        if (i != 6)
+        {
+            bd.Play(Point{ 1 + i, 1 });
+        }
+    }
+
+    CHECK_FALSE(bd.IsFinished());
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
+}
+
+TEST_CASE("[Board] White Win Test 1")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i + 1, 1 });
+        bd.Play(Point{ 5 + i, 10 });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Win Test 2")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i + 1, 19 });
+        bd.Play(Point{ 10, 5 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Win Test 3")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i + 1, 19 });
+        bd.Play(Point{ 3 + i, 3 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 1")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 1 });
+        bd.Play(Point{ 1 + i, 10 });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 2")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 1 });
+        bd.Play(Point{ 2 + i, 10 });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 3")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 10, 1 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 4")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 10, 2 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 5")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 1 + i, 1 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 6")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 + i, 2 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 7")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 + i, 1 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] White Not Fake Win Test 8")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 7; ++i)
+    {
+        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 1 + i, 2 + i });
+    }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
