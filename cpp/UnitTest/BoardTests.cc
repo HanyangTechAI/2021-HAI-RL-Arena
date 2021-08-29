@@ -392,7 +392,7 @@ TEST_CASE("[Board] Ko at Edge Test")
     bd.Play(Point{ 10, 1 }, StoneType::BLACK);
     bd.Play(Point{ 10, 2 }, StoneType::WHITE);
     bd.Play(Point{ 11, 1 }, StoneType::WHITE);
-    
+
     bd.Play(Point{ 9, 1 }, StoneType::WHITE);
 
     CHECK_EQ(bd.IsKo(Point{ 10, 1 }), true);
@@ -734,6 +734,136 @@ TEST_CASE("[Board] White Not Fake Win Test 8")
         bd.Play(Point{ 2 * i, 19 });
         bd.Play(Point{ 1 + i, 2 + i });
     }
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] More Than 7 Test 1")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 8; ++i)
+    {
+        if (i == 5)
+            continue;
+
+        bd.Play(Point{ 5 + i, 10 });
+        bd.Play(Point{ 5 + i, 11 });
+    }
+
+    CHECK_FALSE(bd.IsValidMove(Point{ 10, 10 }));
+    bd.Play(Point{ 1, 1 });
+    CHECK_EQ(bd.IsValidMove(Point{ 10, 11 }), true);
+}
+
+TEST_CASE("[Board] More Than 7 Test 2")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 8; ++i)
+    {
+        if (i == 5)
+            continue;
+
+        bd.Play(Point{ 1 + i, 10 });
+        bd.Play(Point{ 1 + i, 11 });
+    }
+
+    CHECK_FALSE(bd.IsValidMove(Point{ 6, 10 }));
+    bd.Play(Point{ 1, 1 });
+    CHECK_EQ(bd.IsValidMove(Point{ 6, 11 }), true);
+}
+
+TEST_CASE("[Board] More Than 7 Test 3")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 8; ++i)
+    {
+        if (i == 4)
+            continue;
+
+        bd.Play(Point{ 2 + i, 10 });
+        bd.Play(Point{ 2 + i, 11 });
+    }
+
+    CHECK_FALSE(bd.IsValidMove(Point{ 6, 10 }));
+    bd.Play(Point{ 1, 1 });
+    CHECK_EQ(bd.IsValidMove(Point{ 6, 11 }), true);
+}
+
+TEST_CASE("[Board] More Than 7 Win Test 1")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 8; ++i)
+    {
+        if (i == 4)
+            continue;
+
+        bd.Play(Point{ 5 + i, 10 });
+        bd.Play(Point{ 5 + i, 11 });
+    }
+
+    bd.Play(Point{ 9, 11 }, StoneType::WHITE);
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] More Than 7 Win Test 2")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 8; ++i)
+    {
+        if (i == 4)
+            continue;
+
+        bd.Play(Point{ 10, 5 + i });
+        bd.Play(Point{ 11, 5 + i });
+    }
+
+    bd.Play(Point{ 11, 9 }, StoneType::WHITE);
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] More Than 7 Win Test 3")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 8; ++i)
+    {
+        if (i == 4)
+            continue;
+
+        bd.Play(Point{ 1 + i, 10 });
+        bd.Play(Point{ 1 + i, 11 });
+    }
+
+    bd.Play(Point{ 5, 11 }, StoneType::WHITE);
+
+    CHECK_EQ(bd.IsFinished(), true);
+    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+}
+
+TEST_CASE("[Board] More Than 7 Win Test 4")
+{
+    Board bd(19);
+
+    for (int i = 0; i < 8; ++i)
+    {
+        if (i == 4)
+            continue;
+
+        bd.Play(Point{ 2 + i, 10 });
+        bd.Play(Point{ 2 + i, 11 });
+    }
+
+    bd.Play(Point{ 6, 11 }, StoneType::WHITE);
 
     CHECK_EQ(bd.IsFinished(), true);
     CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
