@@ -36,10 +36,15 @@ Board::Board(int boardSize)
 
             board_[idx] = StoneType::NONE;
 
-            neighbors_[idx] +=
-                ((1 + !(x == 1 || x == boardSize)) << shift(StoneType::NONE));
-            neighbors_[idx] +=
-                ((1 + !(y == 1 || y == boardSize)) << shift(StoneType::NONE));
+            const bool xEdge = (x == 1 || x == boardSize);
+            const bool yEdge = (y == 1 || y == boardSize);
+
+            neighbors_[idx] += ((1 + !xEdge) << shift(StoneType::NONE)) |
+                               (xEdge << shift(StoneType::BLACK)) |
+                               (xEdge << shift(StoneType::WHITE));
+            neighbors_[idx] += ((1 + !yEdge) << shift(StoneType::NONE)) |
+                               (yEdge << shift(StoneType::BLACK)) |
+                               (yEdge << shift(StoneType::WHITE));
         }
     }
 }
@@ -157,6 +162,9 @@ void Board::Play(const Point& pt, StoneType color)
     int capturedSize = 0;
     int capturedIdx = 0;
 
+    const bool koShape =
+        neighbors_[idx] & (4 * (1 << shift(Opponent(current_))));
+
     for (NeighborIterator it(*this, pt); it; ++it)
     {
         const int neighborIdx = IDX(*it);
@@ -180,7 +188,7 @@ void Board::Play(const Point& pt, StoneType color)
         }
     }
 
-    if (capturedSize == 1 && (countNeighbors(capturedIdx, current_) == 4))
+    if (capturedSize == 1 && koShape)
     {
         ko_ = PT(capturedIdx);
     }
