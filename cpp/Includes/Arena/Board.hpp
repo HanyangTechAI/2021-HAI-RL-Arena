@@ -5,6 +5,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <ostream>
 
 namespace Arena
 {
@@ -72,6 +73,9 @@ class Board final
     //! \param color 착수할 돌의 색깔 (기본값으로 둘 경우 current_로 설정됨)
     void Play(const Point& pt, StoneType color = StoneType::NONE);
 
+    //! 바둑판 정보를 스트림으로 출력합니다.
+    void ToStream(std::ostream& os) const;
+
  public:
     //!
     //! \brief 이웃한 위치를 순회하는 이터레이터
@@ -109,6 +113,7 @@ class Board final
 
  private:
     int boardSize_;
+    int actualBoardSize_;
     Point ko_{ Resign };
     StoneType current_{ StoneType::BLACK };
     StoneType winner_{ StoneType::INVALID };

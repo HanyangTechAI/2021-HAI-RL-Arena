@@ -1,6 +1,7 @@
 #include <Arena/Board.hpp>
 
 #include <array>
+#include <iomanip>
 
 namespace
 {
@@ -12,19 +13,18 @@ constexpr std::uint16_t shift(Arena::StoneType type)
 
 namespace Arena
 {
-Board::Board(int boardSize) : boardSize_(boardSize)
+Board::Board(int boardSize)
+    : boardSize_(boardSize), actualBoardSize_((boardSize + 2) * (boardSize + 2))
 {
-    const int actualBoardSize = (boardSize + 2) * (boardSize + 2);
-
-    board_.resize(actualBoardSize);
-    parent_.resize(actualBoardSize);
-    next_.resize(actualBoardSize);
-    liberties_.resize(actualBoardSize);
-    neighbors_.resize(actualBoardSize);
+    board_.resize(actualBoardSize_);
+    parent_.resize(actualBoardSize_);
+    next_.resize(actualBoardSize_);
+    liberties_.resize(actualBoardSize_);
+    neighbors_.resize(actualBoardSize_);
 
     std::fill(begin(board_), end(board_), StoneType::INVALID);
-    std::fill(begin(parent_), end(parent_), actualBoardSize);
-    std::fill(begin(next_), end(next_), actualBoardSize);
+    std::fill(begin(parent_), end(parent_), actualBoardSize_);
+    std::fill(begin(next_), end(next_), actualBoardSize_);
     std::fill(begin(liberties_), end(liberties_), 0);
     std::fill(begin(neighbors_), end(neighbors_), 0);
 
@@ -187,6 +187,38 @@ void Board::Play(const Point& pt, StoneType color)
     }
 
     current_ = Opponent(current_);
+}
+
+void Board::ToStream(std::ostream& os) const
+{
+    os << "   ";
+    for (int i = 0; i < boardSize_; ++i)
+    {
+        os << static_cast<char>('A' + i) << ' ';
+    }
+
+    for (int y = 1; y <= boardSize_; ++y)
+    {
+        os << '\n' << std::setw(2) << y << ' ';
+
+        for (int x = 1; x <= boardSize_; ++x)
+        {
+            switch (At(Point{ x, y }))
+            {
+                case StoneType::BLACK:
+                    os << "B ";
+                    break;
+                case StoneType::WHITE:
+                    os << "W ";
+                    break;
+                default:
+                    os << "  ";
+                    break;
+            }
+        }
+    }
+
+    os << "   " << ColorStr(current_) << " to play\n";
 }
 
 int Board::IDX(const Point& pt) const

@@ -1,6 +1,8 @@
 #ifndef ARENA_TYPES_HPP
 #define ARENA_TYPES_HPP
 
+#include <string>
+
 namespace Arena
 {
 //!
@@ -49,6 +51,24 @@ constexpr StoneType Opponent(StoneType color)
 
         default:
             return StoneType::INVALID;
+    }
+}
+
+inline std::string ColorStr(StoneType color)
+{
+    switch (color)
+    {
+        case StoneType::BLACK:
+            return "Black";
+
+        case StoneType::WHITE:
+            return "White";
+
+        case StoneType::NONE:
+            return "None";
+
+        default:
+            return "Invalid";
     }
 }
 }  // namespace Arena
