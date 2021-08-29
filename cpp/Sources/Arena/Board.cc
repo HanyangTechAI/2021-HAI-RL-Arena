@@ -91,7 +91,9 @@ bool Board::IsSuicide(const Point& pt) const
     for (NeighborIterator it(*this, pt); it; ++it)
     {
         const int neighborIdx = IDX(*it);
-        const int libs = liberties_[parent_[neighborIdx]];
+        const int libs = (parent_[neighborIdx] == actualBoardSize_)
+                             ? 9999
+                             : liberties_[parent_[neighborIdx]];
 
         if (board_[neighborIdx] == current_ && libs > 1)
             return false;
@@ -268,7 +270,9 @@ void Board::addNeighbors(int idx, StoneType color)
 
         if (!found)
         {
-            --liberties_[parent_[neighborIdx]];
+            if (parent_[neighborIdx] != actualBoardSize_)
+                --liberties_[parent_[neighborIdx]];
+
             nearParents[count++] = parent_[neighborIdx];
         }
     }
@@ -298,7 +302,9 @@ void Board::removeNeighbors(int idx, StoneType color)
 
         if (!found)
         {
-            --liberties_[parent_[neighborIdx]];
+            if (parent_[neighborIdx] != actualBoardSize_)
+                --liberties_[parent_[neighborIdx]];
+
             nearParents[count++] = parent_[neighborIdx];
         }
     }
