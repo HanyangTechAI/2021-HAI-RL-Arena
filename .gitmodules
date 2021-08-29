@@ -1,3 +1,6 @@
 [submodule "cpp/Libraries/pybind11"]
 	path = cpp/Libraries/pybind11
 	url = https://github.com/pybind/pybind11.git
+[submodule "cpp/Libraries/doctest"]
+	path = cpp/Libraries/doctest
+	url = https://github.com/onqtam/doctest
