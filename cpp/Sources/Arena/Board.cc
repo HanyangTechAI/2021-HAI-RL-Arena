@@ -68,7 +68,13 @@ bool Board::IsValidMove(const Point& pt) const
     if (!IsOnBoard(pt) || (At(pt) != StoneType::NONE))
         return false;
 
-    if (countLine(IDX(pt), current_, false) == 7)
+    const int stonesIncEdge = countLine(IDX(pt), current_, true);
+    const int stonesNotIncEdge = countLine(IDX(pt), current_, false);
+
+    if (current_ == StoneType::WHITE && stonesNotIncEdge >= 7)
+        return true;
+    else if (current_ == StoneType::BLACK && stonesNotIncEdge == 7 &&
+             stonesIncEdge == 7)
         return true;
 
     if (IsSuicide(pt) || IsKo(pt))
@@ -77,7 +83,7 @@ bool Board::IsValidMove(const Point& pt) const
     if (current_ == StoneType::WHITE)
         return true;
 
-    return countLine(IDX(pt), current_, true) < 8;
+    return stonesIncEdge < 8;
 }
 
 bool Board::IsKo(const Point& pt) const
@@ -193,7 +199,7 @@ void Board::Play(const Point& pt, StoneType color)
         ko_ = PT(capturedIdx);
     }
 
-    if (countLine(idx, current_, false) == 7)
+    if (countLine(idx, current_, current_ == StoneType::WHITE) >= 7)
     {
         isFinished_ = true;
         winner_ = current_;
