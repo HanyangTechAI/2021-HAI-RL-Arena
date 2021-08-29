@@ -24,10 +24,13 @@ set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 set(BUILD_SHARED_LIBS FALSE)
 add_subdirectory(Libraries/pybind11)
 
+include_directories(Libraries/doctest/doctest)
+
 # Includes
 include_directories(Includes)
 
 # Project module
 add_subdirectory(Sources/Arena)
 add_subdirectory(RandomBot)
+add_subdirectory(UnitTest)
 add_subdirectory(Extension/pyArena)
