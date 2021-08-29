@@ -287,3 +287,102 @@ TEST_CASE("[Board] Capture Many at Edge Test")
     CHECK_EQ(bd.At(Point{ 10, 1 }), StoneType::NONE);
     CHECK_EQ(bd.At(Point{ 11, 1 }), StoneType::NONE);
 }
+
+TEST_CASE("[Board] Suicide Tests")
+{
+    Board bd(19);
+
+    bd.Play(Point{ 9, 9 }, StoneType::BLACK);
+    bd.Play(Point{ 9, 10 }, StoneType::BLACK);
+    bd.Play(Point{ 9, 11 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 11 }, StoneType::BLACK);
+    bd.Play(Point{ 11, 9 }, StoneType::BLACK);
+    bd.Play(Point{ 11, 10 }, StoneType::BLACK);
+    bd.Play(Point{ 11, 11 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 9 }, StoneType::BLACK);
+
+    CHECK_EQ(bd.IsSuicide(Point{ 10, 10 }, StoneType::BLACK), false);
+    CHECK_EQ(bd.IsSuicide(Point{ 10, 10 }, StoneType::WHITE), true);
+
+    bd.Play(Point{ 8, 9 }, StoneType::WHITE);
+    bd.Play(Point{ 8, 10 }, StoneType::WHITE);
+    bd.Play(Point{ 8, 11 }, StoneType::WHITE);
+    bd.Play(Point{ 12, 9 }, StoneType::WHITE);
+    bd.Play(Point{ 12, 10 }, StoneType::WHITE);
+    bd.Play(Point{ 12, 11 }, StoneType::WHITE);
+    bd.Play(Point{ 9, 8 }, StoneType::WHITE);
+    bd.Play(Point{ 10, 8 }, StoneType::WHITE);
+    bd.Play(Point{ 11, 8 }, StoneType::WHITE);
+    bd.Play(Point{ 9, 12 }, StoneType::WHITE);
+    bd.Play(Point{ 10, 12 }, StoneType::WHITE);
+
+    CHECK_EQ(bd.IsSuicide(Point{ 10, 10 }, StoneType::BLACK), false);
+    CHECK_EQ(bd.IsSuicide(Point{ 10, 10 }, StoneType::WHITE), true);
+
+    bd.Play(Point{ 11, 12 }, StoneType::WHITE);
+
+    CHECK_EQ(bd.IsSuicide(Point{ 10, 10 }, StoneType::BLACK), true);
+    CHECK_EQ(bd.IsSuicide(Point{ 10, 10 }, StoneType::WHITE), false);
+}
+
+TEST_CASE("[Board] Fake Ko Test")
+{
+    Board bd(19);
+
+    bd.Play(Point{ 9, 10 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 11 }, StoneType::BLACK);
+    bd.Play(Point{ 11, 10 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 9 }, StoneType::BLACK);
+
+    bd.Play(Point{ 9, 11 }, StoneType::WHITE);
+    bd.Play(Point{ 10, 12 }, StoneType::WHITE);
+    bd.Play(Point{ 11, 11 }, StoneType::WHITE);
+    bd.Play(Point{ 12, 10 }, StoneType::WHITE);
+    bd.Play(Point{ 11, 9 }, StoneType::WHITE);
+
+    bd.Play(Point{ 10, 10 }, StoneType::WHITE);
+
+    CHECK_FALSE(bd.IsKo(Point{ 10, 11 }));
+    CHECK_FALSE(bd.IsKo(Point{ 11, 10 }));
+}
+
+TEST_CASE("[Board] Ko Test")
+{
+    Board bd(19);
+
+    bd.Play(Point{ 9, 10 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 11 }, StoneType::BLACK);
+    bd.Play(Point{ 11, 10 }, StoneType::BLACK);
+    bd.Play(Point{ 10, 9 }, StoneType::BLACK);
+
+    bd.Play(Point{ 9, 11 }, StoneType::WHITE);
+    bd.Play(Point{ 10, 12 }, StoneType::WHITE);
+    bd.Play(Point{ 11, 11 }, StoneType::WHITE);
+
+    bd.Play(Point{ 10, 10 }, StoneType::WHITE);
+
+    CHECK_EQ(bd.IsKo(Point{ 10, 11 }), true);
+
+    bd.Play(Point{ 1, 1 });
+    bd.Play(Point{ 1, 2 });
+
+    CHECK_FALSE(bd.IsKo(Point{ 10, 11 }));
+}
+
+TEST_CASE("[Board] Ko at Corner Test")
+{
+    Board bd(19);
+
+    bd.Play(Point{ 1, 2 });
+    bd.Play(Point{ 1, 3 });
+    bd.Play(Point{ 2, 1 });
+    bd.Play(Point{ 2, 2 });
+
+    bd.ToStream(std::cout);
+
+    bd.Play(Point{ 1, 1 }, StoneType::WHITE);
+
+    bd.ToStream(std::cout);
+
+    CHECK_EQ(bd.IsKo(Point{ 1, 2 }), true);
+}
