@@ -82,15 +82,15 @@ def run(args: Namespace):
         if is_human[now]:
             while True:
                 try:
-                    move = input("your_move(ex: 1 A )[q to exit]: ")
+                    move = input("your_move(ex: A 1 )[q to exit]: ")
                     if move == "q":
                         players["b"].send_signal(9)
                         players["w"].send_signal(9)
                         sys.exit(0)
 
                     move = move.split()
-                    x = int(move[0])
-                    y = ord(move[1]) - ord("A") + 1
+                    x = int(move[1])
+                    y = ord(move[0]) - ord("A") + 1
 
                     assert board.IsValidMove(Point(x, y))
                     break
