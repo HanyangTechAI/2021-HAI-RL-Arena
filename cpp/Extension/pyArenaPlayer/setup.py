@@ -10,4 +10,7 @@ setup(
     author="FYLSunghwan",
     author_email="sunghwan519@hotmail.com",
     packages=find_packages(exclude=["tests"]),
+    entry_points={
+        "console_scripts": ["pyarena = pyArenaPlayer:__main__"],
+    },
 )

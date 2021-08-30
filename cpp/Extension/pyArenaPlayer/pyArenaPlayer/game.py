@@ -1,34 +1,57 @@
 import os
+import platform
 import sys
-from subprocess import PIPE, Popen
 from argparse import Namespace
+from subprocess import PIPE, Popen
 
 from pyArena import Board, Point, StoneType
 
 from .utils import get_board_string, read, write
+
+title = r"""
+ ________  ___    ___ ________  ________  _______   ________   ________
+|\   __  \|\  \  /  /|\   __  \|\   __  \|\  ___ \ |\   ___  \|\   __  \
+\ \  \|\  \ \  \/  / | \  \|\  \ \  \|\  \ \   __/|\ \  \\ \  \ \  \|\  \
+ \ \   ____\ \    / / \ \   __  \ \   _  _\ \  \_|/_\ \  \\ \  \ \   __  \
+  \ \  \___|\/  /  /   \ \  \ \  \ \  \\  \\ \  \_|\ \ \  \\ \  \ \  \ \  \
+   \ \__\ __/  / /      \ \__\ \__\ \__\\ _\\ \_______\ \__\\ \__\ \__\ \__\
+    \|__||\___/ /        \|__|\|__|\|__|\|__|\|_______|\|__| \|__|\|__|\|__|
+         \|___|/
+"""
 
 
 def run(args: Namespace):
     board_size = 10
     turn = 0
 
+    black_agent_path = (
+        os.path.join(os.path.dirname(__file__), "player_agent.py")
+        if args.black_agent_path is None
+        else args.black_agent_path
+    )
+    white_agent_path = (
+        os.path.join(os.path.dirname(__file__), "player_agent.py")
+        if args.white_agent_path is None
+        else args.white_agent_path
+    )
+
     players = {
         "b": Popen(
-            [sys.executable, "-u", args.black_agent_path],
+            [sys.executable, "-u", black_agent_path],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
         ),
         "w": Popen(
-            [sys.executable, "-u", args.white_agent_path],
+            [sys.executable, "-u", white_agent_path],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
         ),
     }
     is_human = {
-        "b": args.black_human,
-        "w": args.white_human,
+        "b": args.black_agent_path is None,
+        "w": args.white_agent_path is None,
     }
     stone_type = {
         "b": StoneType.BLACK,
@@ -41,14 +64,20 @@ def run(args: Namespace):
         write(players[player], ("board_size " + str(board_size) + "\n"))
         out = read(players[player])
 
-    while board.IsFinished() == False:
+    while board.IsFinished() is False:
         turn += 1
         if turn % 2 == 1:
             now, opponent = "b", "w"
         else:
             now, opponent = "w", "b"
 
-        os.system("clear")
+        if not args.full_log:
+            if platform.system() == "Windows":
+                os.system("cls")
+            else:
+                os.system("clear")
+            print(title)
+
         print(get_board_string(board, board_size))
 
         print(f"turn: {turn} player: {now}")
@@ -57,15 +86,20 @@ def run(args: Namespace):
         if is_human[now]:
             while True:
                 try:
-                    move = input("your_move(ex: 1 A): ")
+                    move = input("your_move(ex: 1 A )[q to exit]: ")
+                    if move == "q":
+                        players["b"].send_signal(9)
+                        players["w"].send_signal(9)
+                        sys.exit(0)
+
                     move = move.split()
                     x = int(move[0])
                     y = ord(move[1]) - ord("A") + 1
 
                     assert board.IsValidMove(Point(x, y))
                     break
-                except:
-                    print("invalid move")
+                except Exception as e:
+                    print(e)
                     pass
 
             write(players[now], str(x) + " " + str(y) + "\n")
