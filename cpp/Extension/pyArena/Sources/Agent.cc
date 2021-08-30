@@ -38,11 +38,6 @@ class PyAgent : public Agent
     {
         PYBIND11_OVERRIDE_PURE(void, Agent, ClearBoard);
     }
-
-    void TimeLeft(int blackTime, int whiteTime) override
-    {
-        PYBIND11_OVERRIDE_PURE(void, Agent, TimeLeft, blackTime, whiteTime);
-    }
 };
 
 void buildAgent(py::module& m)
