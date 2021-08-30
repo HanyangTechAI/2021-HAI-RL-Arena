@@ -18,7 +18,7 @@ void buildPointStruct(py::module& m)
 
 void buildResignStruct(py::module& m)
 {
-    m.def("resign", []() { return Resign; });
+    m.def("Resign", []() { return Resign; });
 }
 
 void buildStoneTypeEnum(py::module& m)
@@ -32,5 +32,5 @@ void buildStoneTypeEnum(py::module& m)
 
 void buildOpponentFunc(py::module& m)
 {
-    m.def("opponent", &Opponent);
+    m.def("Opponent", &Opponent);
 }
