@@ -13,7 +13,7 @@ class PlayerAgent(Agent):
     def __init__(self, name: str):
         super().__init__(name)
         self.board = None
-        self.board_size_ = 10
+        self.board_size_ = 15
 
     def BoardSize(self, size: int) -> None:
         """
