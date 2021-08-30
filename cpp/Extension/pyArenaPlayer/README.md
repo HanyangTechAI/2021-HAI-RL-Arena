@@ -5,7 +5,7 @@ pyArena를 플레이할 수 있는 플레이어입니다.
 ## How to Run
 ```shell
 # 프로젝트 cpp폴더에서 pyArena를 설치합니다.
-$> cd pyArena/cpp && pip install .
+$> cd 2021-HAI-RL-Arena/cpp && pip install .
 $> cd Extension/pyArenaPlayer && pip install .
 
 $> pyarena
