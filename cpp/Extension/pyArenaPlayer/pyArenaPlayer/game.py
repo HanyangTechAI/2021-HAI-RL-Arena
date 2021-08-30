@@ -17,7 +17,7 @@ title = r"""
 
 
 def run(args: Namespace):
-    board_size = 10
+    board_size = 15
     turn = 0
 
     black_agent_path = (
