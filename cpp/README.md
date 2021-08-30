@@ -3,4 +3,8 @@
 
 ## 빠른 시작
 
+```shell
+$> pip install .
+```
+
 ## API 구조
