@@ -199,7 +199,7 @@ void Board::Play(const Point& pt, StoneType color)
         ko_ = PT(capturedIdx);
     }
 
-    if (countLine(idx, current_, current_ == StoneType::WHITE) >= 7)
+    if (countLine(idx, current_, false) >= 7)
     {
         isFinished_ = true;
         winner_ = current_;
