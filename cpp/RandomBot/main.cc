@@ -27,9 +27,9 @@ class RandomBot final : public Arena::Agent
         return Arena::Point{ X, Y };
     }
 
-    void Play(Arena::StoneType oppColor, const Arena::Point& pt) override
+    void Play(Arena::StoneType color, const Arena::Point& pt) override
     {
-        (void)oppColor;
+        (void)color;
         (void)pt;
     }
 

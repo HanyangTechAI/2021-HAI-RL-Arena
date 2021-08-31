@@ -29,9 +29,9 @@ class PyAgent : public Agent
         PYBIND11_OVERRIDE_PURE(Point, Agent, GenMove, color);
     }
 
-    void Play(StoneType oppColor, const Point& pt) override
+    void Play(StoneType color, const Point& pt) override
     {
-        PYBIND11_OVERRIDE_PURE(void, Agent, Play, oppColor, pt);
+        PYBIND11_OVERRIDE_PURE(void, Agent, Play, color, pt);
     }
 
     void ClearBoard() override

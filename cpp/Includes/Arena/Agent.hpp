@@ -30,10 +30,10 @@ class Agent
     //! \return 생성된 착수 위치.
     virtual Point GenMove(StoneType color) = 0;
 
-    //! 상대방이 착수한 위치와 상대방의 색깔 정보를 받았을 때 호출됩니다.
-    //! \param oppColor 상대방의 돌 색깔.
-    //! \param pt 상대방의 착수 위치.
-    virtual void Play(StoneType oppColor, const Point& pt) = 0;
+    //! 착수한 위치와 색깔 정보를 받았을 때 호출됩니다.
+    //! \param color 착수할 돌 색깔.
+    //! \param pt 착수 위치.
+    virtual void Play(StoneType color, const Point& pt) = 0;
 
     //! 흑/백 각자에게 남은 시간 정보를 받았을 때 호출됩니다.
     //! \param blackTime 흑에게 남은 시간(초)

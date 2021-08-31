@@ -40,14 +40,14 @@ class ExampleAgent(Agent):
 
         return Point(-1, -1)
 
-    def Play(self, opp_color: StoneType, point: Point) -> None:
+    def Play(self, color: StoneType, point: Point) -> None:
         """
-        상대방이 착수한 위치와 상대방의 색깔 정보를 받았을 때 호출됩니다.
+        착수한 위치와 색깔 정보를 받았을 때 호출됩니다.
 
-        :param opp_color: 상대방의 돌 색깔.
+        :param color: 착수할 돌 색깔.
         :param point: 상대방의 착수 위치.
         """
-        self.board.Play(point, opp_color)
+        self.board.Play(point, color)
 
     def TimeLeft(self, black_time: int, white_time: int) -> None:
         """

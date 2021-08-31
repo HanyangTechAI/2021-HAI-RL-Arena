@@ -63,14 +63,14 @@ class PlayerAgent(Agent):
             except ValueError as e:
                 print(e)
 
-    def Play(self, opp_color: StoneType, point: Point) -> None:
+    def Play(self, color: StoneType, point: Point) -> None:
         """
         Called when the agent is asked to play a move.
 
-        :param opp_color: Opponent's color
+        :param color: Color to move
         :param point: A point
         """
-        self.board.Play(point, opp_color)
+        self.board.Play(point, color)
 
     def TimeLeft(self, black_time: int, white_time: int) -> None:
         """
