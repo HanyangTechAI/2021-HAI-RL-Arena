@@ -33,13 +33,13 @@ class AgentManager:
         }
         self.players = {
             "b": Popen(
-                [sys.executable, "-u", _black_agent_path],
+                [sys.executable, "-u", _black_agent_path, "--board-size", str(board_size)],
                 stdin=PIPE,
                 stdout=PIPE,
                 stderr=PIPE,
             ),
             "w": Popen(
-                [sys.executable, "-u", _white_agent_path],
+                [sys.executable, "-u", _white_agent_path, "--board-size", str(board_size)],
                 stdin=PIPE,
                 stdout=PIPE,
                 stderr=PIPE,

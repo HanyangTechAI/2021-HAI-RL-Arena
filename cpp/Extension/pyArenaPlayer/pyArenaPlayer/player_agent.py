@@ -1,4 +1,5 @@
 import sys
+import argparse
 
 from pyArena import Agent, Board, Point, StoneType
 
@@ -88,5 +89,9 @@ class PlayerAgent(Agent):
 
 
 if __name__ == "__main__":
-    agent = PlayerAgent("Player")
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--board-size', type=int, default=15, help='Board Size')
+    args = parser.parse_args()
+
+    agent = PlayerAgent("Player", board_size=args.board_size)
     agent.Run()
