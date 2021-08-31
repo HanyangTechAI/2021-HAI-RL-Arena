@@ -10,10 +10,10 @@ class PlayerAgent(Agent):
     :param name: Agent's name
     """
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, board_size: int = 15):
         super().__init__(name)
         self.board = None
-        self.board_size_ = 15
+        self.board_size = board_size
 
     def BoardSize(self, size: int) -> None:
         """
@@ -21,7 +21,7 @@ class PlayerAgent(Agent):
 
         :param board_size: Board size
         """
-        self.board_size_ = size
+        self.board_size = size
         self.board = Board(size)
 
     def TimeSetting(self, times_per_move: int) -> None:
@@ -40,7 +40,11 @@ class PlayerAgent(Agent):
         :return: A point
         """
         while True:
-            move = sys.stdin.readline().strip().split()
+            move = sys.stdin.readline().strip()
+            if move == "quit":
+                return Point(-1, -1)
+            
+            move = move.split()
             try:
                 if len(move) <= 1:
                     raise ValueError(move)
@@ -80,7 +84,7 @@ class PlayerAgent(Agent):
         """
         Called when the agent is asked to clear the board.
         """
-        self.board = Board(self.board_size_)
+        self.board = Board(self.board_size)
 
 
 if __name__ == "__main__":

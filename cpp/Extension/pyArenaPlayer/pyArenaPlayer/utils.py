@@ -1,6 +1,26 @@
 from pyArena import Board, Point, StoneType
 
 
+def str_to_stonetype(stone_type_str: str):
+    """
+    Convert a string to a stone type.
+
+    :param stone_type_str: The string to convert.
+    :returns: The stone type.
+    """
+    return StoneType.BLACK if stone_type_str == "b" else StoneType.WHITE
+
+
+def stonetype_to_str(stone_type: StoneType):
+    """
+    Convert a stone type to a string.
+
+    :param stone_type: The stone type to convert.
+    :returns: The string representation of the stone type.
+    """
+    return "b" if stone_type == StoneType.BLACK else "w"
+
+
 def get_board_string(board: Board, board_size: int):
     """
     Return a string representation of the board.
