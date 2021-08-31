@@ -1,8 +1,10 @@
-from pyArena import StoneType, Opponent, Board, Point
-from .utils import read, write, str_to_stonetype, stonetype_to_str, get_board_string
-from subprocess import PIPE, Popen
 import os
 import sys
+from subprocess import PIPE, Popen
+
+from pyArena import Board, Opponent, Point, StoneType
+
+from .utils import get_board_string, read, stonetype_to_str, write
 
 
 class AgentManager:
@@ -13,6 +15,7 @@ class AgentManager:
     :param black_agent_path: (Optional) Black agent's source path
     :param white_agent_path: (Optional) White agent's source path
     """
+
     def __init__(self, board_size, black_agent_path=None, white_agent_path=None):
         _black_agent_path = (
             os.path.join(os.path.dirname(__file__), "player_agent.py")
@@ -33,13 +36,25 @@ class AgentManager:
         }
         self.players = {
             "b": Popen(
-                [sys.executable, "-u", _black_agent_path, "--board-size", str(board_size)],
+                [
+                    sys.executable,
+                    "-u",
+                    _black_agent_path,
+                    "--board-size",
+                    str(board_size),
+                ],
                 stdin=PIPE,
                 stdout=PIPE,
                 stderr=PIPE,
             ),
             "w": Popen(
-                [sys.executable, "-u", _white_agent_path, "--board-size", str(board_size)],
+                [
+                    sys.executable,
+                    "-u",
+                    _white_agent_path,
+                    "--board-size",
+                    str(board_size),
+                ],
                 stdin=PIPE,
                 stdout=PIPE,
                 stderr=PIPE,

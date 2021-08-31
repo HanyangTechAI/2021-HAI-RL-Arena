@@ -2,12 +2,11 @@ import os
 import platform
 import sys
 from argparse import Namespace
-from subprocess import PIPE, Popen
 
-from pyArena import Board, Point, StoneType
+from pyArena import StoneType
 
-from .utils import get_board_string, read, stonetype_to_str, str_to_stonetype, write
 from .manager import AgentManager
+from .utils import stonetype_to_str
 
 title = r"""
  ____  _  _  __   ____  ____  __ _   __
