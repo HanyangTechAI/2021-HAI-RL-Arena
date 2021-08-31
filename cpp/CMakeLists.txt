@@ -7,6 +7,8 @@ project(HAIArena)
 # Set c++ standard
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 add_subdirectory(Libraries/pybind11)
 
 include_directories(Libraries/doctest/doctest)
