@@ -15,7 +15,9 @@ $> pyarena
 ```shell
 $> pyarena --help
 
-usage: pyarena [-h] [--black-agent-path BLACK_AGENT_PATH] [--white-agent-path WHITE_AGENT_PATH] [--full-log]
+usage: pyarena [-h] [--black-agent-path BLACK_AGENT_PATH]
+               [--white-agent-path WHITE_AGENT_PATH] [--board-size BOARD_SIZE]
+               [--full-log]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -27,6 +29,8 @@ agent info:
                         흑돌의 Agent 위치
   --white-agent-path WHITE_AGENT_PATH
                         백돌의 Agent 위치
+  --board-size BOARD_SIZE
+                        전체 보드 크기
   --full-log            화면을 지우지 않고 모든 로그를 남깁니다.
 
 ```
