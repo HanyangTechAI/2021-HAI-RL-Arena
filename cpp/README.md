@@ -64,3 +64,84 @@ board = ar.Board(19)
 ```
 
 ## API 구조
+
+**Agent**에 대한 API 문서입니다.
+
+(C++)      [https://www.notion.so/Agent-5de622c33aa14fec8fc704de254a021f](https://www.notion.so/Agent-5de622c33aa14fec8fc704de254a021f)
+
+(Python)  [https://www.notion.so/Agent-de00ba42ce684ce3a1fdc4d3d079dee2](https://www.notion.so/Agent-de00ba42ce684ce3a1fdc4d3d079dee2)
+
+---
+
+**Board**에 대한 API 문서입니다.
+
+(C++)      [https://www.notion.so/Board-0ae28fcf5edf48918e6a1773fb4da5ce](https://www.notion.so/Board-0ae28fcf5edf48918e6a1773fb4da5ce)
+
+(Python)  [https://www.notion.so/Board-bc39d429fd1249e8a5b2054abde51f2f](https://www.notion.so/Board-bc39d429fd1249e8a5b2054abde51f2f)
+
+---
+
+상속에 대한 설명입니다. Agent를 상속하여 커스텀 에이전트(custom-agent)를 구현할 때는 아래 부분을 참고하여 설계를 진행합니다. C++, Python 모두 "상속"의 개념을 지원하므로 각각에 대해 아래의 기본 구조를 따라 진행하시면 됩니다.
+
+가. C++
+
+```cpp
+class MyAgent: public Agent {
+	// 생성자
+	MyAgent(...) {
+		...
+	}
+
+	// Agent에서 virtual로 선언된 부분은 모두 구현합니다.
+	void BoardSize(int boardSize) {
+		...
+	}
+
+	void TimeSetting(int timesPerMove) {
+		...
+	}
+
+	Point GenMove(StoneType color) {
+		...
+	}
+
+	void Play(StoneType oppColor, const Point& pt) {
+		...
+	}
+
+	void ClearBoard() {
+		...
+	}
+
+	void custom_function(...) {
+		...
+	}
+	...
+}
+```
+
+나. Python
+
+```python
+class MyAgent(Agent):
+	def __init__(self, name: str):
+		super().__init__(name)
+    ...
+
+  def BoardSize(self, size: int) -> None:
+		self.board_size = size
+    self.board = Board(size)
+		...
+
+  def GenMove(self, color: StoneType) -> Point:
+    ...
+
+  def Play(self, opp_color: StoneType, point: Point) -> None:
+		...
+
+  def TimeLeft(self, black_time: int, white_time: int) -> None:
+	  ...
+
+  def ClearBoard(self) -> None:
+		...
+```
