@@ -66,5 +66,5 @@ class ExampleAgent(Agent):
 
 
 if __name__ == "__main__":
-    agent = ExampleAgent("Player")
+    agent = ExampleAgent("ExampleAgent")
     agent.Run()
