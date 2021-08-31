@@ -84,8 +84,8 @@ def run(args: Namespace):
                 try:
                     move = input("your_move(ex: A 1 )[q to exit]: ")
                     if move == "q":
-                        players["b"].send_signal(9)
-                        players["w"].send_signal(9)
+                        write(players[now], "quit\n")
+                        write(players[opponent], "quit\n")
                         sys.exit(0)
 
                     move = move.split()
@@ -103,6 +103,8 @@ def run(args: Namespace):
         out = read(players[now]).split()
         play_payload = "play " + now + " " + out[1] + " " + out[2] + "\n"
         board.Play(Point(int(out[1]), int(out[2])), stone_type[now])
+        write(players[now], play_payload)
+        read(players[now])
         write(players[opponent], play_payload)
         read(players[opponent])
 
