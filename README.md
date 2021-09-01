@@ -1,7 +1,7 @@
 # 2021 HAI RL Arena
 2021년 2학기 한양대학교 인공지능 동아리 HAI에서 열린 따목 대회 깃허브 저장소입니다.
 
-API 사용 방법은 [이곳](https://github.com/HanyangTechAI/2021-HAI-RL-Arena/tree/master/cpp#readme)을 참고해주세요.
+**대회 관련 코드와 API 사용 방법은 [이곳](https://github.com/HanyangTechAI/2021-HAI-RL-Arena/tree/master/src#readme)을 참고해주세요.**
 
 ## 게임 용어
 - 바둑판: 게임이 진행되는 격자모양의 판.
@@ -19,6 +19,9 @@ API 사용 방법은 [이곳](https://github.com/HanyangTechAI/2021-HAI-RL-Arena
 <위 모양을 패라고 한다.>
 
 ## 게임 규칙
+
+> [대회 규칙 전문 Link](https://sugared-creature-dc5.notion.site/5687fa8d6cd84c08b10211d02d819aeb)
+
 - 시간은 한 사람당 15분 제한으로, 주어진 15분을 다 사용한 순간 시간초과로 패배한다.
 - 300턴을 초과하는 경우 양측 모두 패배 처리된다.
 - 가로 세로 15줄의 바둑판에서 진행된다.
