@@ -26,12 +26,12 @@ sudo apt install git
 
 (Windows)
 ```bash
-git clone --recursive https://github.com/HanyangTechAI/2021-RL-Arena
+git clone --recursive https://github.com/HanyangTechAI/2021-HAI-RL-Arena
 ```
 
 (Linux)
 ```bash
-git clone --recursive https://github.com/HanyangTechAI/2021-RL-Arena.git
+git clone --recursive https://github.com/HanyangTechAI/2021-HAI-RL-Arena.git
 ```
 
 가. C++
