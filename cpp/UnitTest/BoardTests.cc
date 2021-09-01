@@ -627,116 +627,116 @@ TEST_CASE("[Board] White Win Test 3")
     CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 1")
+TEST_CASE("[Board] White Fake Win Test 1")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 1 });
+        bd.Play(Point{ 2 * i + 1, 1 });
         bd.Play(Point{ 1 + i, 10 });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 2")
+TEST_CASE("[Board] White Fake Win Test 2")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 1 });
+        bd.Play(Point{ 2 * i + 1, 1 });
         bd.Play(Point{ 2 + i, 10 });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 3")
+TEST_CASE("[Board] White Fake Win Test 3")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 * i + 1, 19 });
         bd.Play(Point{ 10, 1 + i });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 4")
+TEST_CASE("[Board] White Fake Win Test 4")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 * i + 1, 19 });
         bd.Play(Point{ 10, 2 + i });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 5")
+TEST_CASE("[Board] White Fake Win Test 5")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 * i + 1, 19 });
         bd.Play(Point{ 1 + i, 1 + i });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 6")
+TEST_CASE("[Board] White Fake Win Test 6")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 * i + 1, 19 });
         bd.Play(Point{ 2 + i, 2 + i });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 7")
+TEST_CASE("[Board] White Fake Win Test 7")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 * i + 1, 19 });
         bd.Play(Point{ 2 + i, 1 + i });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
-TEST_CASE("[Board] White Not Fake Win Test 8")
+TEST_CASE("[Board] White Fake Win Test 8")
 {
     Board bd(19);
 
     for (int i = 0; i < 7; ++i)
     {
-        bd.Play(Point{ 2 * i, 19 });
+        bd.Play(Point{ 2 * i + 1, 19 });
         bd.Play(Point{ 1 + i, 2 + i });
     }
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
 TEST_CASE("[Board] More Than 7 Test 1")
@@ -846,8 +846,8 @@ TEST_CASE("[Board] More Than 7 Win Test 3")
 
     bd.Play(Point{ 5, 11 }, StoneType::WHITE);
 
-    CHECK_EQ(bd.IsFinished(), true);
-    CHECK_EQ(bd.GetWinner(), StoneType::WHITE);
+    CHECK_EQ(bd.IsFinished(), false);
+    CHECK_EQ(bd.GetWinner(), StoneType::INVALID);
 }
 
 TEST_CASE("[Board] More Than 7 Win Test 4")

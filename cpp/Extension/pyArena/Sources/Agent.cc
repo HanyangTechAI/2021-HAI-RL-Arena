@@ -19,25 +19,24 @@ class PyAgent : public Agent
         PYBIND11_OVERRIDE_PURE(void, Agent, BoardSize, boardSize);
     }
 
+    void TimeLeft(int blackTime, int whiteTime) override
+    {
+        PYBIND11_OVERRIDE_PURE(void, Agent, TimeLeft, blackTime, whiteTime);
+    }
 
     Point GenMove(StoneType color) override
     {
         PYBIND11_OVERRIDE_PURE(Point, Agent, GenMove, color);
     }
 
-    void Play(StoneType oppColor, const Point& pt) override
+    void Play(StoneType color, const Point& pt) override
     {
-        PYBIND11_OVERRIDE_PURE(void, Agent, Play, oppColor, pt);
+        PYBIND11_OVERRIDE_PURE(void, Agent, Play, color, pt);
     }
 
     void ClearBoard() override
     {
         PYBIND11_OVERRIDE_PURE(void, Agent, ClearBoard);
-    }
-
-    void TimeLeft(int blackTime, int whiteTime) override
-    {
-        PYBIND11_OVERRIDE_PURE(void, Agent, TimeLeft, blackTime, whiteTime);
     }
 };
 
@@ -45,10 +44,10 @@ void buildAgent(py::module& m)
 {
     py::class_<Agent, PyAgent>(m, "Agent")
         .def(py::init<std::string>())
-        .def("board_size", &Agent::BoardSize)
-        .def("gen_move", &Agent::GenMove)
-        .def("play", &Agent::Play)
-        .def("clear_board", &Agent::ClearBoard)
-        .def("time_left", &Agent::TimeLeft)
-        .def("run", &Agent::Run);
+        .def("BoardSize", &Agent::BoardSize)
+        .def("TimeLeft", &Agent::TimeLeft)
+        .def("GenMove", &Agent::GenMove)
+        .def("Play", &Agent::Play)
+        .def("ClearBoard", &Agent::ClearBoard)
+        .def("Run", &Agent::Run);
 }
