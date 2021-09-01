@@ -22,16 +22,10 @@ sudo apt install git
 # git config --global user.mail [메일 주소]
 ```
 
-레포지토리를 로컬에 복제하여 사용하기 위한 단계입니다. 적절한 위치(예를 들면 Documents 폴더 안)에서 아래의 코드를 cmd에 입력합니다.
+레포지토리를 로컬에 복제하여 사용하기 위한 단계입니다. 적절한 위치에서 아래 명령어를 입력합니다.
 
-(Windows)
 ```bash
 git clone --recursive https://github.com/HanyangTechAI/2021-HAI-RL-Arena
-```
-
-(Linux)
-```bash
-git clone --recursive https://github.com/HanyangTechAI/2021-HAI-RL-Arena.git
 ```
 
 가. C++
@@ -58,16 +52,9 @@ pip install .
 pip install .
 ```
 
-기존에 만든 .py 파일을 이용하여 실행시키려면 다음과 같이 입력합니다.
-
-```bash
-cd lib
-python3 mybadugi.py
-```
-
 ### 대회 시작하기
 
-파이썬의 경우, 필요한 라이브러리를 import합니다. 만약 import가 되지 않는다면, 이전 단계를 다시 확인해보는 것이 권장됩니다.
+파이썬의 경우, 필요한 라이브러리를 import합니다. 만약 import가 되지 않는다면, 이전 단계를 다시 확인해보는 것을 권장합니다.
 
 ```bash
 import pyArena as ar
@@ -79,16 +66,16 @@ import pyArena as ar
 from pyArena import Agent, Board, StoneType, Point
 ```
 
-에이전트(Agent) 객체 하나를 생성합니다. 이때, 인자로 string형의 이름을 넣어야 합니다. 아래의 예시는 "test"라는 이름을 가진 에이전트를 생성한 모습입니다.
+에이전트(Agent) 객체 하나를 생성합니다. 이때, 인자로 str형의 이름을 넣어야 합니다. 아래의 예시는 "test"라는 이름을 가진 에이전트를 생성한 모습입니다.
 
 ```bash
 ag = ar.Agent("test")
 ```
 
-이제 보드판을 만들 차례입니다. 아래의 코드를 통해 바둑 보드판 Board 객체 하나를 생성합니다. 바둑판은 일반적으로 가로, 세로는 각각 19개의 줄을 가지고 있으므로, 인자로 19를 넣어 객체를 생성합니다.
+이제 보드판을 만들 차례입니다. 아래의 코드를 통해 바둑 보드판 Board 객체 하나를 생성합니다. 바둑판은 일반적으로 가로, 세로는 각각 15개의 줄을 가지고 있으므로, 인자로 15를 넣어 객체를 생성합니다.
 
 ```bash
-board = ar.Board(19)
+board = ar.Board(15)
 ```
 
 ## API 구조
@@ -133,17 +120,14 @@ class MyAgent: public Agent {
 		...
 	}
 
-	void Play(StoneType oppColor, const Point& pt) {
+	void Play(StoneType color, const Point& pt) {
 		...
 	}
 
 	void ClearBoard() {
 		...
 	}
-
-	void custom_method(...) {
-		...
-	}
+	
 	...
 }
 ```
@@ -164,7 +148,7 @@ class MyAgent(Agent):
 	def GenMove(self, color: StoneType) -> Point:
 		...
 
-	def Play(self, opp_color: StoneType, point: Point) -> None:
+	def Play(self, color: StoneType, point: Point) -> None:
 		...
 
 	def TimeLeft(self, black_time: int, white_time: int) -> None:
