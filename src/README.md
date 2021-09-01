@@ -167,6 +167,7 @@ $> make -j
 ```cpp
 StoneType.BLACK // 검정색 StoneType
 StoneType.WHITE // 하얀색 StoneType
+StoneType.NONE // 비어있는 StoneType
 StoneType.INVALID // 알 수 없는 StoneType
 
 Point(X, Y) // 바둑판의 좌표를 설정.
