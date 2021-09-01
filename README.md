@@ -1,6 +1,8 @@
 # 2021 HAI RL Arena
 2021년 2학기 한양대학교 인공지능 동아리 HAI에서 열린 따목 대회 깃허브 저장소입니다.
 
+API 사용 방법은 [이곳](https://github.com/HanyangTechAI/2021-HAI-RL-Arena/tree/master/cpp#readme)을 참고해주세요.
+
 ## 게임 용어
 - 바둑판: 게임이 진행되는 격자모양의 판.
 - N선: 바둑판에서 N번째로 가장자리에 위치한 선.
