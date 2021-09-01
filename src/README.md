@@ -12,11 +12,7 @@ Windows의 경우, 아래의 공식 링크문서를 참고하여 WSL을 설치�
 cmd에 아래의 코드를 입력하여 필요한 것들을 설치합니다.
 
 ```bash
-$> sudo apt install python3-distutils
-
-$> sudo apt install python3-dev  # for python3.x installs
-
-$> sudo apt install git
+$> sudo apt install python3-distutils python3-dev git cmake
 ```
 
 레포지토리를 로컬에 복제하여 사용하기 위한 단계입니다. 적절한 위치에서 아래 명령어를 입력합니다.
