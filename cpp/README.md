@@ -14,9 +14,9 @@ cmd에 아래의 코드를 입력하여 필요한 것들을 설치합니다.
 ```bash
 sudo apt install python3-distutils
 
-sudo apt-get install python3-dev  # for python3.x installs
+sudo apt install python3-dev  # for python3.x installs
 
-sudo apt-get install git
+sudo apt install git
 
 # git config --global user.name [이름]
 # git config --global user.mail [메일 주소]
@@ -24,9 +24,17 @@ sudo apt-get install git
 
 레포지토리를 로컬에 복제하여 사용하기 위한 단계입니다. 적절한 위치(예를 들면 Documents 폴더 안)에서 아래의 코드를 cmd에 입력합니다.
 
+(Windows)
 ```bash
-git clone https://github.com/JYPark09/2021-HAI-RL-Arena
+git clone --recursive https://github.com/HanyangTechAI/2021-RL-Arena
 ```
+
+(Linux)
+```bash
+git clone --recursive https://github.com/HanyangTechAI/2021-RL-Arena.git
+```
+
+가. C++
 
 2021-HAI-RL-Arena/cpp 위치로 이동합니다. 이동한 후 아래의 코드를 입력합니다.
 
@@ -36,19 +44,39 @@ cd cpp
 mkdir build && cmake .. && make -j
 ```
 
-이제 마지막 단계입니다. lib 폴더로 이동한 후, python을 실행시킬 수 있다면 모든 준비가 다 되었습니다.
+나. Python
+
+2021-HAI-RL-Arena/cpp 위치로 이동합니다. 이동한 후 아래의 코드를 입력합니다.
+
+```bash
+pip install .
+```
+
+2021-HAI-RL-Arena/cpp/Extension/pyArenaPlayer 위치로 이동합니다. 이동한 후 아래의 코드를 입력합니다.
+
+```bash
+pip install .
+```
+
+기존에 만든 .py 파일을 이용하여 실행시키려면 다음과 같이 입력합니다.
 
 ```bash
 cd lib
-python3
+python3 mybadugi.py
 ```
 
 ### 대회 시작하기
 
-필요한 라이브러리를 import합니다. 만약 import가 되지 않는다면, 이전 단계를 다시 확인해보는 것이 권장됩니다.
+파이썬의 경우, 필요한 라이브러리를 import합니다. 만약 import가 되지 않는다면, 이전 단계를 다시 확인해보는 것이 권장됩니다.
 
 ```bash
 import pyArena as ar
+```
+
+또는,
+
+```bash
+from pyArena import Agent, Board, StoneType, Point
 ```
 
 에이전트(Agent) 객체 하나를 생성합니다. 이때, 인자로 string형의 이름을 넣어야 합니다. 아래의 예시는 "test"라는 이름을 가진 에이전트를 생성한 모습입니다.
@@ -113,7 +141,7 @@ class MyAgent: public Agent {
 		...
 	}
 
-	void custom_function(...) {
+	void custom_method(...) {
 		...
 	}
 	...
@@ -126,22 +154,22 @@ class MyAgent: public Agent {
 class MyAgent(Agent):
 	def __init__(self, name: str):
 		super().__init__(name)
-    ...
+		...
 
-  def BoardSize(self, size: int) -> None:
+	def BoardSize(self, size: int) -> None:
 		self.board_size = size
-    self.board = Board(size)
+		self.board = Board(size)
 		...
 
-  def GenMove(self, color: StoneType) -> Point:
-    ...
-
-  def Play(self, opp_color: StoneType, point: Point) -> None:
+	def GenMove(self, color: StoneType) -> Point:
 		...
 
-  def TimeLeft(self, black_time: int, white_time: int) -> None:
-	  ...
+	def Play(self, opp_color: StoneType, point: Point) -> None:
+		...
 
-  def ClearBoard(self) -> None:
+	def TimeLeft(self, black_time: int, white_time: int) -> None:
+		...
+
+	def ClearBoard(self) -> None:
 		...
 ```
